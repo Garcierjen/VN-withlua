@@ -3,21 +3,25 @@ local menud = require("menud")
 local love = require("love")
 local configs = require("config")
 
+
+function m.conf(t)
+    nocap = "yungtar"
+end
+
 function m.load()
-    x, y = 1, 1
-    tlb = 1
+    love.window.setTitle("el macho")
+    love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
 end
 
 function m.update(dt)
-    tlb = tlb + 1
-    x = x + 1
-    y = y + 1
-    print(#menud.object)
+    centerx, centery = love.window.getMode()
+    fps = love.timer.getFPS()
 end
 
 function m.draw()
-    menud.box("lol",{x,y},{tlb,tlb},configs.cols.box,"fill")
-    love.graphics.print(tlb,50,-50,5,5,0,0)
+    menud.box({centerx / 2,centery / 2},{50,50},configs.cols.box,"fill")
+    love.graphics.setColor(255 / 255, 255 / 255, 255 / 255)
+    love.graphics.print(fps,centerx / 2,centery / 2,5,5,0,0)
 end
 
 return m
